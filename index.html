@@ -10,10 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CSS ATUALIZADO E COMPLETO --- */
+        /* --- CSS ATUALIZADO COM DESIGN RESPONSIVO --- */
         :root {
             --cor-fundo: #e9e2d7;
-            /* NOVA COR DE PAPEL ENVELHECIDO */
             --cor-papel: #f3e9d2; 
             --cor-moldura: #fdfbf5;
             --cor-texto-principal: #5a4a42;
@@ -70,7 +69,7 @@
 
         /* --- VISÃO DO ÁLBUM --- */
         #album-view {
-            display: none; /* Começa escondido */
+            display: none;
             flex-direction: column;
             align-items: center;
             width: 100%;
@@ -80,7 +79,7 @@
         .book-container {
             position: relative;
             width: 100%;
-            max-width: 1300px; /* Aumentado para caber mais fotos */
+            max-width: 1300px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -111,15 +110,12 @@
             background-color: var(--cor-papel);
             width: 90%;
             padding: 40px;
-            /* NOVA MOLDURA E SOMBRA */
             border: 20px solid var(--cor-moldura);
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
             border-radius: 4px;
             min-height: 600px;
             position: relative;
         }
-
-        /* EFEITO DE ESPIRAL REMOVIDO */
 
         .page {
             display: none;
@@ -136,7 +132,6 @@
             padding: 15px 15px 30px 15px;
             box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
             position: relative;
-            /* TAMANHO REDUZIDO PARA CABER MAIS FOTOS */
             width: 260px; 
             transform: rotate(0deg);
             transition: transform 0.2s, box-shadow 0.2s;
@@ -148,8 +143,8 @@
         }
         .polaroid img {
             width: 100%;
-            height: 200px; /* Altura fixa para as imagens */
-            object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+            height: 200px;
+            object-fit: cover;
             display: block;
             margin-bottom: 10px;
         }
@@ -169,6 +164,44 @@
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- REGRAS PARA CELULAR (MEDIA QUERIES) --- */
+        /* Aplicado em telas com largura máxima de 768px */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px; /* Menos preenchimento nas laterais */
+            }
+
+            #cover-page h1 {
+                font-size: 2.5em; /* Fonte da capa menor */
+            }
+            
+            .book {
+                width: 100%;
+                padding: 15px; /* Menos preenchimento interno */
+                border-width: 10px; /* Moldura mais fina */
+                min-height: auto; /* Altura automática */
+            }
+
+            /* As fotos agora ficam em uma única coluna */
+            .polaroid {
+                width: 90%; /* Ocupa 90% da largura da página */
+                max-width: 300px; /* Mas não passa de 300px */
+            }
+
+            /* Ajusta a posição das setas para não atrapalhar */
+            .nav-arrow {
+                width: 40px;
+                height: 40px;
+            }
+            .nav-arrow.left {
+                left: -5px;
+            }
+            .nav-arrow.right {
+                right: -5px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -245,7 +278,6 @@
             showPage(currentPageIndex);
         });
 
-        // Mostra a primeira página do álbum (mas o álbum continua escondido pela div pai)
         showPage(currentPageIndex);
     </script>
 </body>
