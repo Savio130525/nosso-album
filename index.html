@@ -1,93 +1,88 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nossas Memórias</title>
-    
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0e9e9;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
+ <html lang="pt-BR">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Nossas Memórias</title>
+     <style>
+         body {
+             font-family: 'Old Standard TT', serif; /* Fonte com um toque antigo */
+             background-color: #f5f0e1; /* Cor de fundo mais suave */
+             margin: 40px;
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+         }
 
-        header h1 {
-            color: #c2185b;
-        }
+         .page {
+             background-color: #fff;
+             border: 1px solid #d4c7b1;
+             box-shadow: 5px 5px 10px #aaa;
+             padding: 30px;
+             margin-bottom: 30px;
+             width: 80%;
+             max-width: 900px;
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: space-around;
+         }
 
-        .gallery-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            max-width: 1200px;
-            margin: 40px auto;
-        }
+         .photo-container {
+             width: 28%; /* Aproximadamente 3 fotos por linha */
+             margin-bottom: 20px;
+             border: 5px solid #eee8d5;
+             box-shadow: 2px 2px 5px #ccc;
+             overflow: hidden;
+         }
 
-        .photo-frame {
-            background-color: #fff;
-            border: 10px solid #fff;
-            border-radius: 4px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1), 0 6px 20px rgba(0,0,0,0.1);
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
+         .photo-container img {
+             width: 100%;
+             height: auto;
+             display: block;
+         }
 
-        .photo-frame:hover {
-            transform: scale(1.05) rotate(2deg);
-        }
+         h1 {
+             color: #a52a2a; /* Cor de título mais clássica */
+             margin-bottom: 30px;
+             font-size: 2.5em;
+         }
 
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+         footer {
+             margin-top: 20px;
+             font-style: italic;
+             color: #777;
+         }
+     </style>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap" rel="stylesheet">
+ </head>
+ <body>
+     <h1>Nosso Álbum de Recordações ❤️</h1>
 
-        footer {
-            margin-top: 50px;
-            font-style: italic;
-        }
+     <div class="page">
+         <div class="photo-container">
+             <img src="images/foto1.jpg" alt="Memória 1">
+         </div>
+         <div class="photo-container">
+             <img src="images/foto2.jpg" alt="Memória 2">
+         </div>
+         <div class="photo-container">
+             <img src="images/foto3.jpg" alt="Memória 3">
+         </div>
+         <div class="photo-container">
+             <img src="images/foto4.jpg" alt="Memória 4">
+         </div>
+         <div class="photo-container">
+             <img src="images/foto5.jpg" alt="Memória 5">
+         </div>
+         <div class="photo-container">
+             <img src="images/foto6.jpg" alt="Memória 6">
+         </div>
+     </div>
 
-        /* Ajuste para telas menores (celulares) */
-        @media (max-width: 768px) {
-            .gallery-container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Nosso Porta-Retrato Digital ❤️</h1>
-    </header>
-
-    <main class="gallery-container">
-        <div class="photo-frame">
-            <img src="images/foto1.jpg" alt="Descrição da foto 1">
-        </div>
-        <div class="photo-frame">
-            <img src="images/foto2.jpg" alt="Descrição da foto 2">
-        </div>
-        <div class="photo-frame">
-            <img src="images/foto3.jpg" alt="Descrição da foto 3">
-        </div>
-        <div class="photo-frame">
-            <img src="images/foto4.jpg" alt="Descrição da foto 4">
-        </div>
-        <div class="photo-frame">
-            <img src="images/foto5.jpg" alt="Descrição da foto 5">
-        </div>
-        <div class="photo-frame">
-            <img src="images/foto6.jpg" alt="Descrição da foto 6">
-        </div>
-    </main>
-
-    <footer>
-        <p>Feito com amor</p>
-    </footer>
-</body>
-</html>
+     <footer>
+         Com carinho e memórias.
+     </footer>
+ </body>
+ </html>
