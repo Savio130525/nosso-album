@@ -7,34 +7,85 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Lora&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* CSS para o efeito de álbum de fotos antigo e interativo */
-
+        :root {
+            --cor-fundo: #e9e2d7;
+            --cor-papel: #faf3e0;
+            --cor-texto-principal: #5a4a42;
+            --cor-texto-secundario: #7c6f64;
+            --cor-espiral-clara: #c0c0c0; /* Prata */
+            --cor-espiral-escura: #595959; /* Sombra do furo */
+        }
+        
         body {
-            background-color: #e9e2d7;
+            background-color: var(--cor-fundo);
             font-family: 'Lora', serif;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        /* --- PÁGINA DE CAPA --- */
+        #cover-page {
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow: hidden; /* Evita barras de rolagem indesejadas */
+            align-items: center;
+            height: calc(100vh - 40px);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
         }
 
+        #cover-page h1 {
+            font-size: 3.5em;
+            color: var(--cor-texto-principal);
+            margin: 0;
+        }
+
+        #cover-page p {
+            font-size: 1.2em;
+            font-style: italic;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 40px;
+        }
+
+        #open-album-btn {
+            font-family: 'Lora', serif;
+            font-size: 1.2em;
+            padding: 15px 30px;
+            background-color: var(--cor-texto-principal);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #open-album-btn:hover {
+            background-color: #3d322d;
+            transform: scale(1.05);
+        }
+
+        /* --- VISÃO DO ÁLBUM --- */
+        #album-view {
+            display: none; /* Começa escondido */
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
         .book-container {
-            position: relative; /* Contexto para posicionar as setas */
+            position: relative;
             width: 100%;
             max-width: 1200px;
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-top: 20px;
         }
 
-        /* Setas de navegação */
         .nav-arrow {
             position: absolute;
             top: 50%;
@@ -50,74 +101,62 @@
             justify-content: center;
             transition: background-color 0.2s;
         }
-
-        .nav-arrow:hover {
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-
-        .nav-arrow.left {
-            left: -25px;
-        }
-
-        .nav-arrow.right {
-            right: -25px;
-        }
-        
-        .nav-arrow svg {
-            width: 24px;
-            height: 24px;
-            fill: #5a4a42;
-        }
-
-        .book-title {
-            font-size: 2.2em;
-            color: #5a4a42;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+        .nav-arrow:hover { background-color: rgba(255, 255, 255, 0.8); }
+        .nav-arrow.left { left: -25px; }
+        .nav-arrow.right { right: -25px; }
+        .nav-arrow svg { width: 24px; height: 24px; fill: var(--cor-texto-principal); }
 
         .book {
-            background-color: #faf3e0;
+            background-color: var(--cor-papel);
             width: 100%;
             padding: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             border: 1px solid #dcd3c3;
             border-radius: 4px;
-            min-height: 600px; /* Altura mínima para o livro */
+            min-height: 600px;
             position: relative;
         }
 
-        /* Estilo base para todas as páginas */
+        /* EFEITO DA ESPIRAL NO MEIO */
+        .book::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            background-image: repeating-linear-gradient(
+                var(--cor-papel) 0px, var(--cor-papel) 10px,
+                var(--cor-espiral-escura) 10px, var(--cor-espiral-escura) 25px,
+                var(--cor-espiral-clara) 25px, var(--cor-espiral-clara) 26px,
+                var(--cor-espiral-escura) 26px, var(--cor-espiral-escura) 40px
+            );
+            box-shadow: inset 2px 0 5px rgba(0,0,0,0.15), inset -2px 0 5px rgba(0,0,0,0.15);
+            z-index: 1;
+        }
+
         .page {
-            display: none; /* Todas as páginas começam escondidas */
+            display: none;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            gap: 20px;
-            animation: fadeIn 0.8s ease-in-out;
+            gap: 25px;
         }
+        .page.active { display: flex; }
 
-        /* A página ativa é a única visível */
-        .page.active {
-            display: flex;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Estilo da "Polaroid" para cada foto (mesmo de antes) */
         .polaroid {
             background: #ffffff;
             padding: 15px 15px 70px 15px;
             box-shadow: 3px 3px 8px rgba(0,0,0,0.25);
             position: relative;
             width: 250px;
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            /* FOTOS RETAS - SEM ROTAÇÃO */
+            transform: rotate(0deg); 
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         .polaroid:hover {
-            transform: scale(1.08) !important;
+            transform: scale(1.08);
             box-shadow: 10px 10px 20px rgba(0,0,0,0.3);
             z-index: 10;
         }
@@ -127,122 +166,96 @@
             font-family: 'Caveat', cursive;
             position: absolute;
             bottom: 15px;
-            left: 0;
-            right: 0;
+            left: 0; right: 0;
             text-align: center;
             font-size: 24px;
             color: #2b2b2b;
             margin: 0;
         }
         
-        /* Rotações aleatórias */
-        .page .polaroid:nth-child(1) { transform: rotate(-6deg); }
-        .page .polaroid:nth-child(2) { transform: rotate(4deg); }
-        .page .polaroid:nth-child(3) { transform: rotate(-2deg); }
-        .page .polaroid:nth-child(4) { transform: rotate(5deg); }
-        .page .polaroid:nth-child(5) { transform: rotate(-5deg); }
-        .page .polaroid:nth-child(6) { transform: rotate(8deg); }
-        
         #page-counter {
             margin-top: 20px;
             font-style: italic;
-            color: #7c6f64;
+            color: var(--cor-texto-secundario);
         }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
-    <div class="book-title">Nosso Álbum de Memórias ❤️</div>
-
-    <div class="book-container">
-        
-        <div class="nav-arrow left" id="prev-page">
-            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>
-        </div>
-
-        <div class="book">
-
-            <div class="page active">
-                <div class="polaroid"><img src="images/foto1.jpg" alt="Memória 1"><p class="date-caption">O Início</p></div>
-                <div class="polaroid"><img src="images/foto2.jpg" alt="Memória 2"><p class="date-caption">Primeira Viagem</p></div>
-                <div class="polaroid"><img src="images/foto3.jpg" alt="Memória 3"><p class="date-caption">Aniversário</p></div>
-                <div class="polaroid"><img src="images/foto4.jpg" alt="Memória 4"><p class="date-caption">Na Chuva</p></div>
-                <div class="polaroid"><img src="images/foto5.jpg" alt="Memória 5"><p class="date-caption">Um Jantar</p></div>
-                <div class="polaroid"><img src="images/foto6.jpg" alt="Memória 6"><p class="date-caption">No Parque</p></div>
-            </div>
-
-            <div class="page">
-                <div class="polaroid"><img src="images/foto7.jpg" alt="Memória 7"><p class="date-caption">Natal em Família</p></div>
-                <div class="polaroid"><img src="images/foto8.jpg" alt="Memória 8"><p class="date-caption">Ano Novo</p></div>
-                <div class="polaroid"><img src="images/foto9.jpg" alt="Memória 9"><p class="date-caption">Dia de Praia</p></div>
-                <div class="polaroid"><img src="images/foto10.jpg" alt="Memória 10"><p class="date-caption">Cinema</p></div>
-                <div class="polaroid"><img src="images/foto11.jpg" alt="Memória 11"><p class="date-caption">Formatura</p></div>
-                <div class="polaroid"><img src="images/foto12.jpg" alt="Memória 12"><p class="date-caption">Mais um dia feliz</p></div>
-            </div>
-
-            <div class="page">
-                <div class="polaroid"><img src="images/foto13.jpg" alt="Memória 13"><p class="date-caption">Pôr do Sol</p></div>
-                <div class="polaroid"><img src="images/foto14.jpg" alt="Memória 14"><p class="date-caption">Festa à Fantasia</p></div>
-                <div class="polaroid"><img src="images/foto15.jpg" alt="Memória 15"><p class="date-caption">Viagem pra Serra</p></div>
-                <div class="polaroid"><img src="images/foto16.jpg" alt="Memória 16"><p class="date-caption">Simplesmente nós</p></div>
-            </div>
-            
-        </div>
-        
-        <div class="nav-arrow right" id="next-page">
-            <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>
-        </div>
+    <div id="cover-page">
+        <h1>Nosso Livro de Memórias</h1>
+        <p>Uma coleção dos nossos momentos mais felizes.</p>
+        <button id="open-album-btn">Abrir Álbum</button>
     </div>
-    
-    <div id="page-counter"></div>
+
+    <div id="album-view">
+        <div class="book-container">
+            <div class="nav-arrow left" id="prev-page">
+                <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>
+            </div>
+            <div class="book">
+                <div class="page active">
+                    <div class="polaroid"><img src="images/foto1.jpg" alt="Memória 1"><p class="date-caption">25 de junho de 2025</p></div>
+                    <div class="polaroid"><img src="images/foto2.jpg" alt="Memória 2"><p class="date-caption">12 de janeiro de 2024</p></div>
+                    <div class="polaroid"><img src="images/foto3.jpg" alt="Memória 3"><p class="date-caption">08 de março de 2023</p></div>
+                    <div class="polaroid"><img src="images/foto4.jpg" alt="Memória 4"><p class="date-caption">20 de novembro de 2022</p></div>
+                </div>
+                <div class="page">
+                    <div class="polaroid"><img src="images/foto5.jpg" alt="Memória 5"><p class="date-caption">Natal em Família</p></div>
+                    <div class="polaroid"><img src="images/foto6.jpg" alt="Memória 6"><p class="date-caption">Ano Novo</p></div>
+                    <div class="polaroid"><img src="images/foto7.jpg" alt="Memória 7"><p class="date-caption">Dia de Praia</p></div>
+                </div>
+                <div class="page">
+                    <div class="polaroid"><img src="images/foto8.jpg" alt="Memória 8"><p class="date-caption">Pôr do Sol</p></div>
+                    <div class="polaroid"><img src="images/foto9.jpg" alt="Memória 9"><p class="date-caption">Festa à Fantasia</p></div>
+                </div>
+            </div>
+            <div class="nav-arrow right" id="next-page">
+                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>
+            </div>
+        </div>
+        <div id="page-counter"></div>
+    </div>
 
     <script>
-        // 1. Pega os elementos do HTML que vamos manipular
+        // --- LÓGICA DA PÁGINA DE CAPA ---
+        const openAlbumBtn = document.getElementById('open-album-btn');
+        const coverPage = document.getElementById('cover-page');
+        const albumView = document.getElementById('album-view');
+
+        openAlbumBtn.addEventListener('click', () => {
+            coverPage.style.display = 'none';
+            albumView.style.display = 'flex';
+        });
+
+        // --- LÓGICA DA NAVEGAÇÃO DO ÁLBUM ---
         const prevButton = document.getElementById('prev-page');
         const nextButton = document.getElementById('next-page');
         const pages = document.querySelectorAll('.page');
         const pageCounter = document.getElementById('page-counter');
         
-        // 2. Define o estado inicial
         let currentPageIndex = 0;
         const totalPages = pages.length;
 
-        // 3. Cria a função para mostrar a página correta
         function showPage(index) {
-            // Esconde todas as páginas
-            pages.forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Mostra apenas a página do índice desejado
+            pages.forEach(page => page.classList.remove('active'));
             pages[index].classList.add('active');
-            
-            // Atualiza o contador de páginas
             pageCounter.textContent = `Página ${index + 1} de ${totalPages}`;
         }
 
-        // 4. Adiciona os "escutadores" de clique nas setas
         nextButton.addEventListener('click', () => {
-            // Vai para a próxima página
-            currentPageIndex++;
-            // Se passar da última página, volta para a primeira
-            if (currentPageIndex >= totalPages) {
-                currentPageIndex = 0;
-            }
+            currentPageIndex = (currentPageIndex + 1) % totalPages;
             showPage(currentPageIndex);
         });
 
         prevButton.addEventListener('click', () => {
-            // Vai para a página anterior
-            currentPageIndex--;
-            // Se estiver na primeira e clicar em voltar, vai para a última
-            if (currentPageIndex < 0) {
-                currentPageIndex = totalPages - 1;
-            }
+            currentPageIndex = (currentPageIndex - 1 + totalPages) % totalPages;
             showPage(currentPageIndex);
         });
 
-        // 5. Mostra a primeira página assim que o site carrega
+        // Mostra a primeira página do álbum (mas o álbum está escondido)
         showPage(currentPageIndex);
     </script>
 </body>
