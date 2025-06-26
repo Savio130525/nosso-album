@@ -1,88 +1,133 @@
 <!DOCTYPE html>
- <html lang="pt-BR">
- <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Nossas Memórias</title>
-     <style>
-         body {
-             font-family: 'Old Standard TT', serif; /* Fonte com um toque antigo */
-             background-color: #f5f0e1; /* Cor de fundo mais suave */
-             margin: 40px;
-             display: flex;
-             flex-direction: column;
-             align-items: center;
-         }
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Álbum de Memórias</title>
 
-         .page {
-             background-color: #fff;
-             border: 1px solid #d4c7b1;
-             box-shadow: 5px 5px 10px #aaa;
-             padding: 30px;
-             margin-bottom: 30px;
-             width: 80%;
-             max-width: 900px;
-             display: flex;
-             flex-wrap: wrap;
-             justify-content: space-around;
-         }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Lora&display=swap" rel="stylesheet">
 
-         .photo-container {
-             width: 28%; /* Aproximadamente 3 fotos por linha */
-             margin-bottom: 20px;
-             border: 5px solid #eee8d5;
-             box-shadow: 2px 2px 5px #ccc;
-             overflow: hidden;
-         }
+    <style>
+        /* CSS para o efeito de álbum de fotos antigo */
 
-         .photo-container img {
-             width: 100%;
-             height: auto;
-             display: block;
-         }
+        body {
+            /* Fundo que lembra um tecido ou linho */
+            background-color: #e9e2d7;
+            font-family: 'Lora', serif; /* Uma fonte elegante para o título */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
 
-         h1 {
-             color: #a52a2a; /* Cor de título mais clássica */
-             margin-bottom: 30px;
-             font-size: 2.5em;
-         }
+        .book-title {
+            font-size: 2.5em;
+            color: #5a4a42;
+            margin-bottom: 30px;
+            text-align: center;
+        }
 
-         footer {
-             margin-top: 20px;
-             font-style: italic;
-             color: #777;
-         }
-     </style>
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap" rel="stylesheet">
- </head>
- <body>
-     <h1>Nosso Álbum de Recordações ❤️</h1>
+        /* O "livro" aberto onde as fotos ficarão */
+        .book {
+            background-color: #faf3e0; /* Cor de papel antigo */
+            width: 90%;
+            max-width: 1100px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid #dcd3c3;
+            border-radius: 4px;
 
-     <div class="page">
-         <div class="photo-container">
-             <img src="images/foto1.jpg" alt="Memória 1">
-         </div>
-         <div class="photo-container">
-             <img src="images/foto2.jpg" alt="Memória 2">
-         </div>
-         <div class="photo-container">
-             <img src="images/foto3.jpg" alt="Memória 3">
-         </div>
-         <div class="photo-container">
-             <img src="images/foto4.jpg" alt="Memória 4">
-         </div>
-         <div class="photo-container">
-             <img src="images/foto5.jpg" alt="Memória 5">
-         </div>
-         <div class="photo-container">
-             <img src="images/foto6.jpg" alt="Memória 6">
-         </div>
-     </div>
+            /* Flexbox para espalhar as fotos */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
 
-     <footer>
-         Com carinho e memórias.
-     </footer>
- </body>
- </html>
+        /* Estilo da "Polaroid" para cada foto */
+        .polaroid {
+            background: #ffffff;
+            padding: 15px 15px 70px 15px; /* Espaço extra na parte de baixo para a legenda */
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.25);
+            position: relative;
+            width: 250px; /* Tamanho fixo para as polaroids */
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .polaroid:hover {
+            transform: scale(1.08) !important; /* Aumenta a foto e ignora a rotação */
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.3);
+            z-index: 10; /* Traz a foto para frente das outras */
+        }
+        
+        .polaroid img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Legenda com a data, imitando escrita à mão */
+        .date-caption {
+            font-family: 'Caveat', cursive;
+            position: absolute;
+            bottom: 15px; /* Posiciona na parte branca de baixo */
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 24px;
+            color: #2b2b2b;
+            margin: 0;
+        }
+
+        /* Rotações aleatórias para dar um ar mais natural */
+        .polaroid:nth-child(1) { transform: rotate(-6deg); }
+        .polaroid:nth-child(2) { transform: rotate(4deg); }
+        .polaroid:nth-child(3) { transform: rotate(-2deg); }
+        .polaroid:nth-child(4) { transform: rotate(5deg); }
+        .polaroid:nth-child(5) { transform: rotate(-5deg); }
+        .polaroid:nth-child(6) { transform: rotate(8deg); }
+        
+        footer {
+            margin-top: 40px;
+            font-style: italic;
+            color: #7c6f64;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="book-title">Nosso Álbum de Memórias ❤️</div>
+
+    <div class="book">
+        
+        <div class="polaroid">
+            <img src="images/foto1.jpg" alt="Memória 1">
+            <p class="date-caption">25 de junho de 2025</p>
+        </div>
+
+        <div class="polaroid">
+            <img src="images/foto2.jpg" alt="Memória 2">
+            <p class="date-caption">12 de janeiro de 2024</p>
+        </div>
+
+        <div class="polaroid">
+            <img src="images/foto3.jpg" alt="Memória 3">
+            <p class="date-caption">08 de março de 2023</p>
+        </div>
+
+        <div class="polaroid">
+            <img src="images/foto4.jpg" alt="Memória 4">
+            <p class="date-caption">20 de novembro de 2022</p>
+        </div>
+
+        <div class="polaroid">
+            <img src="images/foto5.jpg" alt="Memória 5">
+            <p class="date-caption">15 de maio de 2021</p>
+        </div>
+
+        <div class="polaroid">
