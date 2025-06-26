@@ -128,16 +128,7 @@
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .polaroid:hover { transform: scale(1.05); box-shadow: 10px 10px 20px rgba(0,0,0,0.3); z-index: 10; }
-        
-        .polaroid img { 
-            width: 100%; 
-            height: 200px; 
-            /* ALTERAÇÃO FEITA AQUI 👇 */
-            object-fit: contain; /* Garante que a foto inteira apareça */
-            background-color: #000; /* Preenche o espaço extra com preto */
-            display: block; 
-            margin-bottom: 10px; 
-        }
+        .polaroid img { width: 100%; height: 200px; object-fit: cover; display: block; margin-bottom: 10px; }
         
         .polaroid.empty {
             border: 2px dashed #ccc;
