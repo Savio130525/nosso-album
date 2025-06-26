@@ -33,6 +33,7 @@
             align-items: center;
             height: calc(100vh - 40px);
             text-align: center;
+            animation: fadeIn 1s ease-in-out;
         }
 
         #cover-page h1 { font-size: 3.5em; color: var(--cor-texto-principal); margin: 0; }
@@ -60,6 +61,7 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
+            animation: fadeIn 1s ease-in-out;
         }
 
         #album-header {
@@ -111,56 +113,45 @@
             border-radius: 4px;
             min-height: 600px;
             position: relative;
-            overflow: hidden;
         }
 
-        .page {
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            right: 40px;
-            bottom: 40px;
-            display: none;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-        .page.active {
-            display: flex;
-            animation: fadeInSimple 0.5s ease-in-out;
-        }
-        
+        .page { display: none; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px; width: 100%; }
+        .page.active { display: flex; }
+
         .polaroid {
             background: #ffffff;
             padding: 15px 15px 30px 15px;
             box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+            position: relative;
             width: 260px; 
             transform: rotate(0deg);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
+        .polaroid:hover { transform: scale(1.05); box-shadow: 10px 10px 20px rgba(0,0,0,0.3); z-index: 10; }
         .polaroid img { width: 100%; height: 200px; object-fit: cover; display: block; margin-bottom: 10px; }
-        .polaroid.empty { border: 2px dashed #ccc; height: 265px; display: flex; align-items: center; justify-content: center; color: #ccc; font-style: italic; background-color: #f9f9f9; }
-        .date-caption { font-family: 'Caveat', cursive; text-align: center; font-size: 20px; color: #2b2b2b; margin: 0; }
         
+        /* Estilo para o espaço vazio */
+        .polaroid.empty {
+            border: 2px dashed #ccc;
+            height: 265px; /* Altura do polaroid + padding */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            font-style: italic;
+            background-color: #f9f9f9;
+        }
+        
+        .date-caption { font-family: 'Caveat', cursive; text-align: center; font-size: 20px; color: #2b2b2b; margin: 0; }
         #page-counter { margin-top: 20px; font-style: italic; color: var(--cor-texto-secundario); }
 
-        /* --- ANIMAÇÕES DE PÁGINA --- */
-        .slide-out-left { animation: slideOutLeft 0.5s forwards; }
-        .slide-in-right { animation: slideInRight 0.5s forwards; }
-        .slide-out-right { animation: slideOutRight 0.5s forwards; }
-        .slide-in-left { animation: slideInLeft 0.5s forwards; }
-
-        @keyframes fadeInSimple { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideOutLeft { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-100%); opacity: 0; } }
-        @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes slideOutRight { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
-        @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         @media (max-width: 768px) {
             body { padding: 10px; }
             #cover-page h1 { font-size: 2.5em; }
             #album-header { flex-direction: column; gap: 15px; }
-            .book { width: 100%; padding: 15px; border-width: 10px; min-height: 500px; }
+            .book { width: 100%; padding: 15px; border-width: 10px; min-height: auto; }
             .polaroid { width: 90%; max-width: 300px; }
             .nav-arrow { width: 40px; height: 40px; }
             .nav-arrow.left { left: -5px; }
@@ -169,6 +160,7 @@
     </style>
 </head>
 <body>
+
     <div id="cover-page">
         <h1>Nosso Livro de Memórias</h1>
         <p>Uma coleção dos nossos momentos mais felizes.</p>
@@ -186,88 +178,88 @@
         <div class="book-container">
             <div class="nav-arrow left" id="prev-page"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg></div>
             <div class="book">
+                <div class="page active">
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
                 </div>
+                <div class="page">
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                </div>
+                <div class="page">
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                </div>
+                <div class="page">
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                </div>
+                <div class="page">
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                </div>
+            </div>
             <div class="nav-arrow right" id="next-page"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></div>
         </div>
         <div id="page-counter"></div>
     </div>
 
     <script>
-        // --- JAVASCRIPT CORRIGIDO ---
-        const pageContents = [
-            `...`, // (Conteúdo das páginas omitido para economizar espaço, mas está no código final)
-        ];
-        
+        // --- JAVASCRIPT FINAL ---
         const openAlbumBtn = document.getElementById('open-album-btn');
         const coverPage = document.getElementById('cover-page');
         const albumView = document.getElementById('album-view');
+
+        openAlbumBtn.addEventListener('click', () => {
+            coverPage.style.display = 'none';
+            albumView.style.display = 'flex';
+        });
+
         const prevButton = document.getElementById('prev-page');
         const nextButton = document.getElementById('next-page');
-        const book = document.querySelector('.book');
+        const pages = document.querySelectorAll('.page');
         const pageCounter = document.getElementById('page-counter');
         
         let currentPageIndex = 0;
-        let isAnimating = false;
-        const totalPages = 5; // Definido manualmente para 5 páginas
+        const totalPages = pages.length;
 
-        function showPage(index, direction) {
-            if (isAnimating) return;
-            
-            const oldPage = book.querySelector('.page');
-            
-            // Se não há direção, é a primeira página. Não há animação de saída.
-            if (direction) {
-                 isAnimating = true;
-                 const outAnimation = direction === 'next' ? 'slide-out-left' : 'slide-out-right';
-                 oldPage.classList.add(outAnimation);
-                 
-                 oldPage.addEventListener('animationend', () => {
-                     oldPage.remove();
-                 }, { once: true });
-            }
-
-            const newPage = document.createElement('div');
-            newPage.classList.add('page');
-            
-            // Simula o conteúdo da página com base no índice
-            let content = '';
-            for (let i = 0; i < 6; i++) {
-                content += `<div class="polaroid empty"><span>Espaço para foto</span></div>`;
-            }
-            newPage.innerHTML = content;
-            
-            // Adiciona a classe de animação de entrada se houver direção
-            if (direction) {
-                const inAnimation = direction === 'next' ? 'slide-in-right' : 'slide-in-left';
-                newPage.classList.add(inAnimation);
-
-                newPage.addEventListener('animationend', () => {
-                    isAnimating = false; // Permite o próximo clique
-                }, { once: true });
-            }
-            
-            book.appendChild(newPage);
-            newPage.classList.add('active');
+        function showPage(index) {
+            pages.forEach(page => page.classList.remove('active'));
+            pages[index].classList.add('active');
             pageCounter.textContent = `Página ${index + 1} de ${totalPages}`;
         }
 
-        openAlbumBtn.addEventListener('click', () => {
-            coverPage.remove();
-            albumView.style.display = 'flex';
-            showPage(currentPageIndex); // Mostra a primeira página, sem direção
-        });
-
         nextButton.addEventListener('click', () => {
-            if (isAnimating) return;
             currentPageIndex = (currentPageIndex + 1) % totalPages;
-            showPage(currentPageIndex, 'next');
+            showPage(currentPageIndex);
         });
 
         prevButton.addEventListener('click', () => {
-            if (isAnimating) return;
             currentPageIndex = (currentPageIndex - 1 + totalPages) % totalPages;
-            showPage(currentPageIndex, 'prev');
+            showPage(currentPageIndex);
         });
+
+        showPage(currentPageIndex);
     </script>
 </body>
 </html>
