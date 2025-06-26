@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
+        /* --- CSS CORRIGIDO E COMPLETO --- */
         :root {
             --cor-fundo: #e9e2d7;
             --cor-papel: #faf3e0;
@@ -18,14 +19,19 @@
             --cor-espiral-clara: #c0c0c0; /* Prata */
             --cor-espiral-escura: #595959; /* Sombra do furo */
         }
-        
+
         body {
             background-color: var(--cor-fundo);
             font-family: 'Lora', serif;
             margin: 0;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
-        
+
         /* --- PÁGINA DE CAPA --- */
         #cover-page {
             display: flex;
@@ -73,17 +79,17 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
+            max-width: 1200px;
+            margin-top: 20px;
             animation: fadeIn 1s ease-in-out;
         }
-        
+
         .book-container {
             position: relative;
             width: 100%;
-            max-width: 1200px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 20px;
         }
 
         .nav-arrow {
@@ -91,7 +97,7 @@
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            z-index: 100;
+            z-index: 200; /* Garante que fique acima do livro */
             background-color: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             width: 50px;
@@ -102,19 +108,21 @@
             transition: background-color 0.2s;
         }
         .nav-arrow:hover { background-color: rgba(255, 255, 255, 0.8); }
-        .nav-arrow.left { left: -25px; }
-        .nav-arrow.right { right: -25px; }
+        .nav-arrow.left { left: -50px; } /* Mais afastado */
+        .nav-arrow.right { right: -50px; } /* Mais afastado */
         .nav-arrow svg { width: 24px; height: 24px; fill: var(--cor-texto-principal); }
 
         .book {
             background-color: var(--cor-papel);
-            width: 100%;
+            width: 90%; /* Ajusta a largura do livro */
             padding: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             border: 1px solid #dcd3c3;
             border-radius: 4px;
             min-height: 600px;
             position: relative;
+            display: flex; /* Para alinhar a espiral e o conteúdo */
+            justify-content: center; /* Centraliza o conteúdo */
         }
 
         /* EFEITO DA ESPIRAL NO MEIO */
@@ -133,46 +141,52 @@
                 var(--cor-espiral-escura) 26px, var(--cor-espiral-escura) 40px
             );
             box-shadow: inset 2px 0 5px rgba(0,0,0,0.15), inset -2px 0 5px rgba(0,0,0,0.15);
-            z-index: 1;
+            z-index: 1; /* Garante que a espiral fique atrás das fotos */
         }
 
         .page {
             display: none;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: center; /* Centraliza as fotos na página */
             align-items: center;
             gap: 25px;
+            width: 100%; /* Garante que a página ocupe toda a largura do livro */
+            position: relative; /* Para o z-index funcionar */
+            z-index: 5; /* Garante que as fotos fiquem acima da espiral */
         }
         .page.active { display: flex; }
 
         .polaroid {
             background: #ffffff;
-            padding: 15px 15px 70px 15px;
+            padding: 15px 15px 30px 15px; /* Menos padding embaixo */
             box-shadow: 3px 3px 8px rgba(0,0,0,0.25);
             position: relative;
-            width: 250px;
-            /* FOTOS RETAS - SEM ROTAÇÃO */
-            transform: rotate(0deg); 
+            width: 280px; /* Aumenta um pouco o tamanho */
+            transform: rotate(0deg);
             transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centraliza a imagem e a legenda */
         }
         .polaroid:hover {
-            transform: scale(1.08);
+            transform: scale(1.05);
             box-shadow: 10px 10px 20px rgba(0,0,0,0.3);
             z-index: 10;
         }
-        .polaroid img { width: 100%; display: block; }
+        .polaroid img {
+            width: 100%;
+            display: block;
+            margin-bottom: 10px; /* Espaço entre a imagem e a legenda */
+        }
 
         .date-caption {
             font-family: 'Caveat', cursive;
-            position: absolute;
-            bottom: 15px;
-            left: 0; right: 0;
             text-align: center;
-            font-size: 24px;
+            font-size: 20px; /* Reduz um pouco a fonte */
             color: #2b2b2b;
             margin: 0;
         }
-        
+
         #page-counter {
             margin-top: 20px;
             font-style: italic;
@@ -255,7 +269,7 @@
             showPage(currentPageIndex);
         });
 
-        // Mostra a primeira página do álbum (mas o álbum está escondido)
+        // Mostra a primeira página do álbum (mas o álbum continua escondido pela div pai)
         showPage(currentPageIndex);
     </script>
 </body>
