@@ -10,28 +10,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CSS CORRIGIDO E COMPLETO --- */
+        /* --- CSS ATUALIZADO E COMPLETO --- */
         :root {
             --cor-fundo: #e9e2d7;
-            --cor-papel: #faf3e0;
+            /* NOVA COR DE PAPEL ENVELHECIDO */
+            --cor-papel: #f3e9d2; 
+            --cor-moldura: #fdfbf5;
             --cor-texto-principal: #5a4a42;
             --cor-texto-secundario: #7c6f64;
-            --cor-espiral-clara: #c0c0c0; /* Prata */
-            --cor-espiral-escura: #595959; /* Sombra do furo */
         }
-
+        
         body {
             background-color: var(--cor-fundo);
             font-family: 'Lora', serif;
             margin: 0;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
         }
-
+        
         /* --- PÁGINA DE CAPA --- */
         #cover-page {
             display: flex;
@@ -79,17 +74,17 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 1200px;
-            margin-top: 20px;
             animation: fadeIn 1s ease-in-out;
         }
-
+        
         .book-container {
             position: relative;
             width: 100%;
+            max-width: 1300px; /* Aumentado para caber mais fotos */
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-top: 20px;
         }
 
         .nav-arrow {
@@ -97,7 +92,7 @@
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            z-index: 200; /* Garante que fique acima do livro */
+            z-index: 200;
             background-color: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             width: 50px;
@@ -108,65 +103,43 @@
             transition: background-color 0.2s;
         }
         .nav-arrow:hover { background-color: rgba(255, 255, 255, 0.8); }
-        .nav-arrow.left { left: -50px; } /* Mais afastado */
-        .nav-arrow.right { right: -50px; } /* Mais afastado */
+        .nav-arrow.left { left: 0; }
+        .nav-arrow.right { right: 0; }
         .nav-arrow svg { width: 24px; height: 24px; fill: var(--cor-texto-principal); }
 
         .book {
             background-color: var(--cor-papel);
-            width: 90%; /* Ajusta a largura do livro */
+            width: 90%;
             padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 1px solid #dcd3c3;
+            /* NOVA MOLDURA E SOMBRA */
+            border: 20px solid var(--cor-moldura);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
             border-radius: 4px;
             min-height: 600px;
             position: relative;
-            display: flex; /* Para alinhar a espiral e o conteúdo */
-            justify-content: center; /* Centraliza o conteúdo */
         }
 
-        /* EFEITO DA ESPIRAL NO MEIO */
-        .book::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 25px;
-            background-image: repeating-linear-gradient(
-                var(--cor-papel) 0px, var(--cor-papel) 10px,
-                var(--cor-espiral-escura) 10px, var(--cor-espiral-escura) 25px,
-                var(--cor-espiral-clara) 25px, var(--cor-espiral-clara) 26px,
-                var(--cor-espiral-escura) 26px, var(--cor-espiral-escura) 40px
-            );
-            box-shadow: inset 2px 0 5px rgba(0,0,0,0.15), inset -2px 0 5px rgba(0,0,0,0.15);
-            z-index: 1; /* Garante que a espiral fique atrás das fotos */
-        }
+        /* EFEITO DE ESPIRAL REMOVIDO */
 
         .page {
             display: none;
             flex-wrap: wrap;
-            justify-content: center; /* Centraliza as fotos na página */
+            justify-content: center;
             align-items: center;
-            gap: 25px;
-            width: 100%; /* Garante que a página ocupe toda a largura do livro */
-            position: relative; /* Para o z-index funcionar */
-            z-index: 5; /* Garante que as fotos fiquem acima da espiral */
+            gap: 20px;
+            width: 100%;
         }
         .page.active { display: flex; }
 
         .polaroid {
             background: #ffffff;
-            padding: 15px 15px 30px 15px; /* Menos padding embaixo */
-            box-shadow: 3px 3px 8px rgba(0,0,0,0.25);
+            padding: 15px 15px 30px 15px;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
             position: relative;
-            width: 280px; /* Aumenta um pouco o tamanho */
+            /* TAMANHO REDUZIDO PARA CABER MAIS FOTOS */
+            width: 260px; 
             transform: rotate(0deg);
             transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centraliza a imagem e a legenda */
         }
         .polaroid:hover {
             transform: scale(1.05);
@@ -175,18 +148,20 @@
         }
         .polaroid img {
             width: 100%;
+            height: 200px; /* Altura fixa para as imagens */
+            object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
             display: block;
-            margin-bottom: 10px; /* Espaço entre a imagem e a legenda */
+            margin-bottom: 10px;
         }
 
         .date-caption {
             font-family: 'Caveat', cursive;
             text-align: center;
-            font-size: 20px; /* Reduz um pouco a fonte */
+            font-size: 20px;
             color: #2b2b2b;
             margin: 0;
         }
-
+        
         #page-counter {
             margin-top: 20px;
             font-style: italic;
@@ -215,15 +190,16 @@
                     <div class="polaroid"><img src="images/foto2.jpg" alt="Memória 2"><p class="date-caption">12 de janeiro de 2024</p></div>
                     <div class="polaroid"><img src="images/foto3.jpg" alt="Memória 3"><p class="date-caption">08 de março de 2023</p></div>
                     <div class="polaroid"><img src="images/foto4.jpg" alt="Memória 4"><p class="date-caption">20 de novembro de 2022</p></div>
+                    <div class="polaroid"><img src="images/foto5.jpg" alt="Memória 5"><p class="date-caption">15 de maio de 2021</p></div>
+                    <div class="polaroid"><img src="images/foto6.jpg" alt="Memória 6"><p class="date-caption">Nosso primeiro dia</p></div>
                 </div>
                 <div class="page">
-                    <div class="polaroid"><img src="images/foto5.jpg" alt="Memória 5"><p class="date-caption">Natal em Família</p></div>
-                    <div class="polaroid"><img src="images/foto6.jpg" alt="Memória 6"><p class="date-caption">Ano Novo</p></div>
-                    <div class="polaroid"><img src="images/foto7.jpg" alt="Memória 7"><p class="date-caption">Dia de Praia</p></div>
-                </div>
-                <div class="page">
-                    <div class="polaroid"><img src="images/foto8.jpg" alt="Memória 8"><p class="date-caption">Pôr do Sol</p></div>
-                    <div class="polaroid"><img src="images/foto9.jpg" alt="Memória 9"><p class="date-caption">Festa à Fantasia</p></div>
+                    <div class="polaroid"><img src="images/foto7.jpg" alt="Memória 7"><p class="date-caption">Natal em Família</p></div>
+                    <div class="polaroid"><img src="images/foto8.jpg" alt="Memória 8"><p class="date-caption">Ano Novo</p></div>
+                    <div class="polaroid"><img src="images/foto9.jpg" alt="Memória 9"><p class="date-caption">Dia de Praia</p></div>
+                    <div class="polaroid"><img src="images/foto10.jpg" alt="Memória 10"><p class="date-caption">Cinema</p></div>
+                    <div class="polaroid"><img src="images/foto11.jpg" alt="Memória 11"><p class="date-caption">Formatura</p></div>
+                    <div class="polaroid"><img src="images/foto12.jpg" alt="Memória 12"><p class="date-caption">Mais um dia feliz</p></div>
                 </div>
             </div>
             <div class="nav-arrow right" id="next-page">
