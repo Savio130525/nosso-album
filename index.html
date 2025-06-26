@@ -130,14 +130,16 @@
         .polaroid:hover { transform: scale(1.05); box-shadow: 10px 10px 20px rgba(0,0,0,0.3); z-index: 10; }
         .polaroid img { width: 100%; height: 200px; object-fit: cover; display: block; margin-bottom: 10px; }
         
+        /* Estilo para o espaço vazio */
         .polaroid.empty {
             border: 2px dashed #ccc;
-            height: 265px;
+            height: 265px; /* Altura do polaroid + padding */
             display: flex;
             align-items: center;
             justify-content: center;
             color: #ccc;
             font-style: italic;
+            background-color: #f9f9f9;
         }
         
         .date-caption { font-family: 'Caveat', cursive; text-align: center; font-size: 20px; color: #2b2b2b; margin: 0; }
@@ -177,20 +179,20 @@
             <div class="nav-arrow left" id="prev-page"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg></div>
             <div class="book">
                 <div class="page active">
-                    <div class="polaroid"><img src="images/foto1.jpg" alt="Memória 1"><p class="date-caption">25 de junho de 2025</p></div>
-                    <div class="polaroid"><img src="images/foto2.jpg" alt="Memória 2"><p class="date-caption">12 de janeiro de 2024</p></div>
-                    <div class="polaroid"><img src="images/foto3.jpg" alt="Memória 3"><p class="date-caption">08 de março de 2023</p></div>
-                    <div class="polaroid"><img src="images/foto4.jpg" alt="Memória 4"><p class="date-caption">20 de novembro de 2022</p></div>
-                    <div class="polaroid"><img src="images/foto5.jpg" alt="Memória 5"><p class="date-caption">15 de maio de 2021</p></div>
-                    <div class="polaroid"><img src="images/foto6.jpg" alt="Memória 6"><p class="date-caption">Nosso primeiro dia</p></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
                 </div>
                 <div class="page">
-                    <div class="polaroid"><img src="images/foto7.jpg" alt="Memória 7"><p class="date-caption">Natal em Família</p></div>
-                    <div class="polaroid"><img src="images/foto8.jpg" alt="Memória 8"><p class="date-caption">Ano Novo</p></div>
-                    <div class="polaroid"><img src="images/foto9.jpg" alt="Memória 9"><p class="date-caption">Dia de Praia</p></div>
-                    <div class="polaroid"><img src="images/foto10.jpg" alt="Memória 10"><p class="date-caption">Cinema</p></div>
-                    <div class="polaroid"><img src="images/foto11.jpg" alt="Memória 11"><p class="date-caption">Formatura</p></div>
-                    <div class="polaroid"><img src="images/foto12.jpg" alt="Memória 12"><p class="date-caption">Mais um dia feliz</p></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
                 </div>
                 <div class="page">
                     <div class="polaroid empty"><span>Espaço para foto</span></div>
