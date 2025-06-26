@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CSS ATUALIZADO COM DESIGN RESPONSIVO --- */
+        /* --- CSS COMPLETO E FINAL --- */
         :root {
             --cor-fundo: #e9e2d7;
             --cor-papel: #f3e9d2; 
@@ -50,20 +50,42 @@
             margin-bottom: 40px;
         }
 
-        #open-album-btn {
+        .cover-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Espaço entre os botões */
+        }
+        
+        /* Estilo genérico para os botões */
+        .action-button {
             font-family: 'Lora', serif;
             font-size: 1.2em;
             padding: 15px 30px;
-            background-color: var(--cor-texto-principal);
-            color: white;
-            border: none;
+            border: 2px solid var(--cor-texto-principal);
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+            transition: all 0.3s;
         }
 
+        #open-album-btn {
+            background-color: var(--cor-texto-principal);
+            color: white;
+        }
         #open-album-btn:hover {
             background-color: #3d322d;
+            border-color: #3d322d;
+            transform: scale(1.05);
+        }
+
+        /* Estilo para o novo botão de enviar foto */
+        .send-photo-btn {
+            background-color: transparent;
+            color: var(--cor-texto-principal);
+        }
+        .send-photo-btn:hover {
+            background-color: var(--cor-texto-principal);
+            color: white;
             transform: scale(1.05);
         }
 
@@ -75,6 +97,20 @@
             width: 100%;
             animation: fadeIn 1s ease-in-out;
         }
+
+        #album-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1300px;
+            margin-bottom: 20px;
+        }
+
+        #album-header .book-title {
+            margin: 0;
+            color: var(--cor-texto-principal);
+        }
         
         .book-container {
             position: relative;
@@ -83,7 +119,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 20px;
         }
 
         .nav-arrow {
@@ -165,43 +200,22 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- REGRAS PARA CELULAR (MEDIA QUERIES) --- */
-        /* Aplicado em telas com largura máxima de 768px */
+        /* --- REGRAS PARA CELULAR --- */
         @media (max-width: 768px) {
-            body {
-                padding: 10px; /* Menos preenchimento nas laterais */
-            }
-
-            #cover-page h1 {
-                font-size: 2.5em; /* Fonte da capa menor */
-            }
-            
+            body { padding: 10px; }
+            #cover-page h1 { font-size: 2.5em; }
+            #album-header { flex-direction: column; gap: 15px; }
             .book {
                 width: 100%;
-                padding: 15px; /* Menos preenchimento interno */
-                border-width: 10px; /* Moldura mais fina */
-                min-height: auto; /* Altura automática */
+                padding: 15px;
+                border-width: 10px;
+                min-height: auto;
             }
-
-            /* As fotos agora ficam em uma única coluna */
-            .polaroid {
-                width: 90%; /* Ocupa 90% da largura da página */
-                max-width: 300px; /* Mas não passa de 300px */
-            }
-
-            /* Ajusta a posição das setas para não atrapalhar */
-            .nav-arrow {
-                width: 40px;
-                height: 40px;
-            }
-            .nav-arrow.left {
-                left: -5px;
-            }
-            .nav-arrow.right {
-                right: -5px;
-            }
+            .polaroid { width: 90%; max-width: 300px; }
+            .nav-arrow { width: 40px; height: 40px; }
+            .nav-arrow.left { left: -5px; }
+            .nav-arrow.right { right: -5px; }
         }
-
     </style>
 </head>
 <body>
@@ -209,10 +223,21 @@
     <div id="cover-page">
         <h1>Nosso Livro de Memórias</h1>
         <p>Uma coleção dos nossos momentos mais felizes.</p>
-        <button id="open-album-btn">Abrir Álbum</button>
+        <div class="cover-buttons">
+            <button id="open-album-btn" class="action-button">Abrir Álbum</button>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEwwszKiRvP42TULDUyJpelzgPxJyrf9jajzYxFVMEbsCPOg/viewform?usp=header" target="_blank" class="action-button send-photo-btn">
+                Adicionar uma Nova Memória 💌
+            </a>
+        </div>
     </div>
 
     <div id="album-view">
+        <div id="album-header">
+            <h1 class="book-title">Nossas Recordações</h1>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEwwszKiRvP42TULDUyJpelzgPxJyrf9jajzYxFVMEbsCPOg/viewform?usp=header" target="_blank" class="action-button send-photo-btn">
+                + Eternizar Momento ✨
+            </a>
+        </div>
         <div class="book-container">
             <div class="nav-arrow left" id="prev-page">
                 <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>
