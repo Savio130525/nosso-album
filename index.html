@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CSS COMPLETO E FINAL --- */
+        /* --- CSS FINAL --- */
         :root {
             --cor-fundo: #e9e2d7;
             --cor-papel: #f3e9d2; 
@@ -26,7 +26,6 @@
             padding: 20px;
         }
         
-        /* --- PÁGINA DE CAPA --- */
         #cover-page {
             display: flex;
             flex-direction: column;
@@ -37,26 +36,10 @@
             animation: fadeIn 1s ease-in-out;
         }
 
-        #cover-page h1 {
-            font-size: 3.5em;
-            color: var(--cor-texto-principal);
-            margin: 0;
-        }
-
-        #cover-page p {
-            font-size: 1.2em;
-            font-style: italic;
-            color: var(--cor-texto-secundario);
-            margin-bottom: 40px;
-        }
-
-        .cover-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 20px; /* Espaço entre os botões */
-        }
+        #cover-page h1 { font-size: 3.5em; color: var(--cor-texto-principal); margin: 0; }
+        #cover-page p { font-size: 1.2em; font-style: italic; color: var(--cor-texto-secundario); margin-bottom: 40px; }
+        .cover-buttons { display: flex; flex-direction: column; gap: 20px; }
         
-        /* Estilo genérico para os botões */
         .action-button {
             font-family: 'Lora', serif;
             font-size: 1.2em;
@@ -68,28 +51,11 @@
             transition: all 0.3s;
         }
 
-        #open-album-btn {
-            background-color: var(--cor-texto-principal);
-            color: white;
-        }
-        #open-album-btn:hover {
-            background-color: #3d322d;
-            border-color: #3d322d;
-            transform: scale(1.05);
-        }
+        #open-album-btn { background-color: var(--cor-texto-principal); color: white; }
+        #open-album-btn:hover { background-color: #3d322d; border-color: #3d322d; transform: scale(1.05); }
+        .send-photo-btn { background-color: transparent; color: var(--cor-texto-principal); }
+        .send-photo-btn:hover { background-color: var(--cor-texto-principal); color: white; transform: scale(1.05); }
 
-        /* Estilo para o novo botão de enviar foto */
-        .send-photo-btn {
-            background-color: transparent;
-            color: var(--cor-texto-principal);
-        }
-        .send-photo-btn:hover {
-            background-color: var(--cor-texto-principal);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        /* --- VISÃO DO ÁLBUM --- */
         #album-view {
             display: none;
             flex-direction: column;
@@ -107,10 +73,7 @@
             margin-bottom: 20px;
         }
 
-        #album-header .book-title {
-            margin: 0;
-            color: var(--cor-texto-principal);
-        }
+        #album-header .book-title { margin: 0; color: var(--cor-texto-principal); }
         
         .book-container {
             position: relative;
@@ -152,14 +115,7 @@
             position: relative;
         }
 
-        .page {
-            display: none;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            width: 100%;
-        }
+        .page { display: none; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px; width: 100%; }
         .page.active { display: flex; }
 
         .polaroid {
@@ -171,46 +127,29 @@
             transform: rotate(0deg);
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        .polaroid:hover {
-            transform: scale(1.05);
-            box-shadow: 10px 10px 20px rgba(0,0,0,0.3);
-            z-index: 10;
-        }
-        .polaroid img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .date-caption {
-            font-family: 'Caveat', cursive;
-            text-align: center;
-            font-size: 20px;
-            color: #2b2b2b;
-            margin: 0;
+        .polaroid:hover { transform: scale(1.05); box-shadow: 10px 10px 20px rgba(0,0,0,0.3); z-index: 10; }
+        .polaroid img { width: 100%; height: 200px; object-fit: cover; display: block; margin-bottom: 10px; }
+        
+        .polaroid.empty {
+            border: 2px dashed #ccc;
+            height: 265px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            font-style: italic;
         }
         
-        #page-counter {
-            margin-top: 20px;
-            font-style: italic;
-            color: var(--cor-texto-secundario);
-        }
+        .date-caption { font-family: 'Caveat', cursive; text-align: center; font-size: 20px; color: #2b2b2b; margin: 0; }
+        #page-counter { margin-top: 20px; font-style: italic; color: var(--cor-texto-secundario); }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- REGRAS PARA CELULAR --- */
         @media (max-width: 768px) {
             body { padding: 10px; }
             #cover-page h1 { font-size: 2.5em; }
             #album-header { flex-direction: column; gap: 15px; }
-            .book {
-                width: 100%;
-                padding: 15px;
-                border-width: 10px;
-                min-height: auto;
-            }
+            .book { width: 100%; padding: 15px; border-width: 10px; min-height: auto; }
             .polaroid { width: 90%; max-width: 300px; }
             .nav-arrow { width: 40px; height: 40px; }
             .nav-arrow.left { left: -5px; }
@@ -225,23 +164,17 @@
         <p>Uma coleção dos nossos momentos mais felizes.</p>
         <div class="cover-buttons">
             <button id="open-album-btn" class="action-button">Abrir Álbum</button>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEwwszKiRvP42TULDUyJpelzgPxJyrf9jajzYxFVMEbsCPOg/viewform?usp=header" target="_blank" class="action-button send-photo-btn">
-                Adicionar uma Nova Memória 💌
-            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEwwszKiRvP42TULDUyJpelzgPxJyrf9jajzYxFVMEbsCPOg/viewform?usp=header" target="_blank" class="action-button send-photo-btn">Adicionar uma Nova Memória 💌</a>
         </div>
     </div>
 
     <div id="album-view">
         <div id="album-header">
             <h1 class="book-title">Nossas Recordações</h1>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEwwszKiRvP42TULDUyJpelzgPxJyrf9jajzYxFVMEbsCPOg/viewform?usp=header" target="_blank" class="action-button send-photo-btn">
-                + Eternizar Momento ✨
-            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEwwszKiRvP42TULDUyJpelzgPxJyrf9jajzYxFVMEbsCPOg/viewform?usp=header" target="_blank" class="action-button send-photo-btn">+ Eternizar Momento ✨</a>
         </div>
         <div class="book-container">
-            <div class="nav-arrow left" id="prev-page">
-                <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>
-            </div>
+            <div class="nav-arrow left" id="prev-page"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg></div>
             <div class="book">
                 <div class="page active">
                     <div class="polaroid"><img src="images/foto1.jpg" alt="Memória 1"><p class="date-caption">25 de junho de 2025</p></div>
@@ -259,16 +192,38 @@
                     <div class="polaroid"><img src="images/foto11.jpg" alt="Memória 11"><p class="date-caption">Formatura</p></div>
                     <div class="polaroid"><img src="images/foto12.jpg" alt="Memória 12"><p class="date-caption">Mais um dia feliz</p></div>
                 </div>
+                <div class="page">
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                </div>
+                <div class="page">
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                </div>
+                <div class="page">
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                    <div class="polaroid empty"><span>Espaço para foto</span></div>
+                </div>
             </div>
-            <div class="nav-arrow right" id="next-page">
-                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>
-            </div>
+            <div class="nav-arrow right" id="next-page"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></div>
         </div>
         <div id="page-counter"></div>
     </div>
 
     <script>
-        // --- LÓGICA DA PÁGINA DE CAPA ---
+        // --- JAVASCRIPT FINAL ---
         const openAlbumBtn = document.getElementById('open-album-btn');
         const coverPage = document.getElementById('cover-page');
         const albumView = document.getElementById('album-view');
@@ -278,7 +233,6 @@
             albumView.style.display = 'flex';
         });
 
-        // --- LÓGICA DA NAVEGAÇÃO DO ÁLBUM ---
         const prevButton = document.getElementById('prev-page');
         const nextButton = document.getElementById('next-page');
         const pages = document.querySelectorAll('.page');
